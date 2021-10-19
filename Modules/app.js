@@ -1,3 +1,4 @@
+// npm to craet package.json 
 console.log("hellow");
 const result=require("./result");
 console.log(result);
