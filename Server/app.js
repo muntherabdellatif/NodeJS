@@ -1,13 +1,7 @@
 const http = require("http");
-const fs =require("fs");
+const routing =require("./routing");
 const server = http.createServer((req,res)=>{
-    fs.readFile("./index.html",null,(error,data)=>{
-        if (error){
-            res.end("error in file");
-        }else{
-            res.end(data);
-        }
-    })
+    routing.routing(req,res);
 })
 server.listen(3000,"127.0.0.1",()=>{
     console.log("server is running");
