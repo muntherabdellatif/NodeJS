@@ -1,0 +1,11 @@
+<h1>hello <%= name %></h1>
+<ul>
+    <% for (var n of people) { %>
+        <% if (n.name === "Monther") { %>
+            <li><%= n.name%> (my name)</li>
+        <% }else { %>
+            <li><%= n.name%></li>   
+        <%}%>
+    <% } %>
+</ul>
+<%- include("partial/partial-one") %>
