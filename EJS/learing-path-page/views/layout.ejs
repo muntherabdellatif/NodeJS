@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>learing path</title>
+    <meta name="description" content="this is a web page to put in it your learing path in any field">
+    <!-- font awesome cdn  -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+     <!-- main css  -->
+    <link rel="stylesheet" href="CSS/main.css">
+
+</head>
+<body>
+    <h1>learning path</h1>
+    <div class="new-project-form">
+        <form action="/" method="post">
+            <label for="project">Your next step</label>
+            <input type="text" id="project" name="project" autocomplete="off">
+            <label for="projectDate">Expected date to end it</label>
+            <input type="date" name="projectDate" id="date">
+            <button class="btn" type="submit" name="button" value="addProject">add</button>
+        </form>
+    </div>
+    <div class="new-project-content-form ">
+        <form action="/" method="post">
+            <div class="content-type">
+                <p>sellect content type</p>
+                <div class="type">
+                    <input type="radio" name="type" value="smallPrject" id="small-project">
+                    <label for="small-porject">small project</label>
+                </div>
+                <div class="type">
+                    <input type="radio" name="type" value="book" id="book">
+                    <label for="book">book</label>
+                </div>
+                <div class="type">
+                    <input type="radio" name="type" value="course" id="course">
+                    <label for="course">course</label>
+                </div>
+                <div class="type">
+                    <input type="radio" name="type" value="video" id="video">
+                    <label for="video">video</label>
+                </div>
+            </div>
+            <label for="content-name">content name</label>
+            <input type="text" name="contentName" id="content-name">
+            <label for="content-link">content link</label>
+            <input type="text" name="contentLink" id="content-link">
+            <label for="content-date">content date</label>
+            <input type="date" name="contentDate" id="content-date">
+            <button class="btn addContentFormBtn" type="submit" name="button" value="addProjectContent">add</button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="project col-lg-3">
+            <h3 class="start-date">20/06/2021</h3>
+            <% for (let i=0 ;i<projects.length ;i++) { %>
+                <div class="project-content" id="<%=i%>">
+                    <h2><%=projects[i].name%></h2>
+                    <div class="next">
+                        <i class="fas fa-long-arrow-alt-down"></i>
+                    </div>
+                    <h3 class="end-date"><%=projects[i].date%></h3>
+                </div>
+            <%}%>
+            <button class="btn" type="submit" name="add-new">add new project</button>
+        </div>
+        <div class="steps col-lg-9">
+            <% if (projects.length===0){ %>
+                <h2>Wilcome.</h2>
+                <p>press add-new button to add project in your page.</p>
+                <button class="btn add-content hidden" >add content to your project.</button>
+            <%}else {%>
+                <!-- content  -->
+                <% if (projects[projectId].content.length>0){ %>
+                    <!-- adding small projects -->
+                     <% let smallPrjecttype=0; %>
+                     <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                         <%  if (projects[projectId].content[i].contentType==="smallPrject"){ %>
+                             <% smallPrjecttype=1; %>
+                         <% } %>
+                      <% } %>
+                      <%if (smallPrjecttype===1){ %>
+                        <h2>small projects  :</h2>
+                        <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                            <% if (projects[projectId].content[i].contentType==="smallPrject"){ %>
+                                    <a href="<%=projects[projectId].content[0].contentLink%>">
+                                    <%=projects[projectId].content[i].contentName%></a>
+                                    <p><%=projects[projectId].content[i].cntentDate%></p>
+                            <% } %>
+                        <%}%>
+                    <% } %>   
+                     <!-- adding book -->
+                    <% let booktype=0; %>
+                    <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                        <%  if (projects[projectId].content[i].contentType==="book"){ %>
+                            <% booktype=1; %>
+                        <% } %>
+                     <% } %>
+                     <%if (booktype===1){ %>
+                       <h2>Books :</h2>
+                       <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                           <% if (projects[projectId].content[i].contentType==="book"){ %>
+                                   <a href="<%=projects[projectId].content[0].contentLink%>">
+                                   <%=projects[projectId].content[i].contentName%></a>
+                                   <p><%=projects[projectId].content[i].cntentDate%></p>
+                           <% } %>
+                       <%}%>
+                    <% } %>   
+                    <!-- adding course -->
+                    <% let coursetype=0; %>
+                    <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                        <%  if (projects[projectId].content[i].contentType==="course"){ %>
+                            <% coursetype=1; %>
+                        <% } %>
+                        <% } %>
+                        <%if (coursetype===1){ %>
+                        <h2>courses :</h2>
+                        <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                            <% if (projects[projectId].content[i].contentType==="course"){ %>
+                                    <a href="<%=projects[projectId].content[0].contentLink%>">
+                                    <%=projects[projectId].content[i].contentName%></a>
+                                    <p><%=projects[projectId].content[i].cntentDate%></p>
+                            <% } %>
+                        <%}%>
+                    <% } %>   
+                    <!-- adding video -->
+                    <% let videotype=0; %>
+                    <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                        <%  if (projects[projectId].content[i].contentType==="video"){ %>
+                            <% videotype=1; %>
+                        <% } %>
+                        <% } %>
+                        <%if (videotype===1){ %>
+                        <h2>video :</h2>
+                        <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                            <% if (projects[projectId].content[i].contentType==="video"){ %>
+                                    <a href="<%=projects[projectId].content[0].contentLink%>">
+                                    <%=projects[projectId].content[i].contentName%></a>
+                                    <p><%=projects[projectId].content[i].cntentDate%></p>
+                            <% } %>
+                        <%}%>
+                    <% } %>   
+                <% } %>
+                <button class="btn add-content" >add content to your project.</button>
+            <%}%>
+        </div>
+    </div>
+    <%-body%>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+    <!-- main js  -->
+    <script src="JS/index.js"></script>
+
+</body>
+</html>

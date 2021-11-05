@@ -1,0 +1,197 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --color1: #d1e8e4;
+  --color2: #c37b89;
+  --color3: #bccc9a;
+  --color4: #eae7c6;
+}
+.body {
+  background-color: var(--color1);
+}
+html {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.hidden {
+  display: none;
+}
+.btn {
+  padding: 5px 10px;
+  margin-top: 34px;
+  background-color: var(--color4);
+  color: #333;
+  box-shadow: -5px 5px 9px 0px black;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+h1 {
+  text-shadow: -9px 6px 4px var(--color1);
+  color: var(--color3);
+  font-family: monospace;
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+/* project */
+
+.project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.start-date {
+  color: #555;
+  margin: -10px;
+  font-size: 26px;
+}
+.end-date {
+  position: absolute;
+  top: 101%;
+  left: 63%;
+  font-size: 19px;
+  color: #777;
+}
+.project-content {
+  box-shadow: -5px 5px 9px 0px black;
+  position: relative;
+  padding: 125px;
+  background-color: var(--color2);
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 32px;
+}
+.project-content.active {
+  background-color: var(--color3);
+}
+.project-content.active h2 {
+  color: black;
+}
+.project-content h2 {
+  font-size: 25px;
+  color: white;
+  font-weight: 600;
+}
+.next {
+  display: block;
+  position: absolute;
+  top: 95%;
+}
+.next i {
+  color: var(--color2);
+  font-size: 47px;
+}
+.project-content.active .next i {
+  color: var(--color3);
+}
+
+/* next step form  */
+.new-project-form {
+  z-index: 100;
+  box-shadow: -5px 5px 9px 0px black;
+  border: 1px solid var(--color2);
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px 30px;
+  width: 51%;
+  background-color: var(--color1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.new-project-form.active {
+  top: 50%;
+}
+.new-project-form form {
+  width: 100%;
+}
+.new-project-form form .btn {
+  display: block;
+  margin: 20px auto;
+}
+.new-project-form form label {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #333;
+}
+.new-project-form form input {
+  width: 100%;
+  margin-top: 10px;
+}
+/* steps */
+.steps {
+  padding: 2px;
+}
+.steps h2 {
+  margin-top: 40px;
+  color: var(--color2);
+  font-family: -webkit-pictograph;
+}
+.steps .add-content {
+  width: 98%;
+}
+/* new project content form */
+.new-project-content-form {
+  z-index: 100;
+  box-shadow: -5px 5px 9px 0px black;
+  border: 1px solid var(--color2);
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px 30px;
+  width: 51%;
+  background-color: var(--color1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.new-project-content-form.active {
+  top: 50%;
+}
+.new-project-content-form form {
+  width: 100%;
+}
+.new-project-content-form form .btn {
+  display: block;
+  margin: 20px auto;
+}
+.new-project-content-form form label {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #333;
+}
+.new-project-content-form form input {
+  width: 100%;
+  margin-top: 10px;
+}
+.new-project-content-form .type input {
+  width: 10px;
+}
+.new-project-content-form .type label {
+  margin-top: 0px;
+}
+.new-project-content-form .content-type p {
+  font-size: 20px;
+  margin: 10px 0px 5px;
+  color: #333;
+}
