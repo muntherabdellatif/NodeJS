@@ -10,7 +10,71 @@ const _ =require("lodash");
 
 const app = express();
 
-const projects = [];
+const projects = [
+  {
+  name :"programming basics",
+  date :"2021-07-31",
+  content : [ {
+    contentType :"video" ,
+    contentName :"C++ basics",
+    contentLink :"contentLink" ,
+    cntentDate :"2021-07-9" 
+   } ,
+   {
+    contentType :"video" ,
+    contentName :"C++ OOP",
+    contentLink :"contentLink" ,
+    cntentDate :"2021-07-20" 
+   },
+   {
+    contentType :"video" ,
+    contentName :"C++ data stracture",
+    contentLink :"contentLink" ,
+    cntentDate :"2021-07-20" 
+   }
+  ]} ,
+  {
+    name :"web mern stack basics",
+    date :"2021-11-05",
+    content : [ {
+      contentType :"video" ,
+      contentName :"HTML",
+      contentLink :"contentLink" ,
+      cntentDate :"2021-08-04" 
+     } ,
+     {
+      contentType :"video" ,
+      contentName :"CSS",
+      contentLink :"contentLink" ,
+      cntentDate :"2021-08-19" 
+     },
+     {
+      contentType :"course" ,
+      contentName :"Web development bootcamp Udemy",
+      contentLink :"contentLink" ,
+      cntentDate :"not yet" 
+     },
+     {
+      contentType :"smallPrject" ,
+      contentName :"HTML , CSS project 1",
+      contentLink :"contentLink" ,
+      cntentDate :"2021-08-21" 
+     },
+     {
+      contentType :"smallPrject" ,
+      contentName :"HTML , CSS project 2",
+      contentLink :"contentLink" ,
+      cntentDate :"2021-08-27" 
+     },
+     {
+      contentType :"video" ,
+      contentName :"Bootstrap",
+      contentLink :"contentLink" ,
+      cntentDate :"2021-09-05" 
+     }
+    ]} 
+
+];
 let projectId = 0;
 
 app.set("views",path.join(__dirname,"views")); // set the file include ejs 

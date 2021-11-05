@@ -48,6 +48,19 @@ h1 {
   flex-direction: column;
   align-items: center;
 }
+.project .close i {
+  z-index: 100;
+  cursor: pointer;
+  position: absolute;
+  top: 8%;
+  left: -5%;
+  font-size: 40px;
+  color: red;
+  display: none;
+}
+.project .project-content:hover .close i {
+  display: block;
+}
 .start-date {
   color: #555;
   margin: -10px;
@@ -61,6 +74,7 @@ h1 {
   color: #777;
 }
 .project-content {
+  cursor: pointer;
   box-shadow: -5px 5px 9px 0px black;
   position: relative;
   padding: 125px;
@@ -139,6 +153,21 @@ h1 {
 .steps {
   padding: 2px;
 }
+.steps .type {
+  display: flex;
+  flex-wrap: wrap;
+}
+.steps .type .type-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 15px;
+}
+.steps .type .type-content .icon i {
+  margin-right: 11px;
+  font-size: 60px;
+  color: var(--color3);
+}
 .steps h2 {
   margin-top: 40px;
   color: var(--color2);
@@ -180,6 +209,11 @@ h1 {
   margin-top: 10px;
   color: #333;
 }
+.new-project-content-form form label i {
+  width: 25px;
+  margin-right: 10px;
+  color: var(--color2);
+}
 .new-project-content-form form input {
   width: 100%;
   margin-top: 10px;
@@ -194,4 +228,25 @@ h1 {
   font-size: 20px;
   margin: 10px 0px 5px;
   color: #333;
+}
+/* close project form */
+.close-project-form {
+  z-index: 100;
+  box-shadow: -5px 5px 9px 0px black;
+  border: 1px solid var(--color2);
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px 30px;
+  width: 51%;
+  background-color: var(--color1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.close-project-form.active {
+  top: 50%;
 }

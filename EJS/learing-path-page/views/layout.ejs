@@ -32,19 +32,19 @@
                 <p>sellect content type</p>
                 <div class="type">
                     <input type="radio" name="type" value="smallPrject" id="small-project">
-                    <label for="small-porject">small project</label>
+                    <label for="small-porject"><i class="fas fa-project-diagram"></i> small project</label>
                 </div>
                 <div class="type">
                     <input type="radio" name="type" value="book" id="book">
-                    <label for="book">book</label>
+                    <label for="book"><i class="fas fa-book"></i>   book</label>
                 </div>
                 <div class="type">
                     <input type="radio" name="type" value="course" id="course">
-                    <label for="course">course</label>
+                    <label for="course"><i class="fas fa-chalkboard-teacher"></i> course</label>
                 </div>
                 <div class="type">
                     <input type="radio" name="type" value="video" id="video">
-                    <label for="video">video</label>
+                    <label for="video"><i class="fab fa-youtube"></i>   video</label>
                 </div>
             </div>
             <label for="content-name">content name</label>
@@ -56,11 +56,19 @@
             <button class="btn addContentFormBtn" type="submit" name="button" value="addProjectContent">add</button>
         </form>
     </div>
+    <div class="close-project-form ">
+        <h2>Do you want to delete "<%=projects[projectId].name%>"project ?</h2>
+        <button class="btn" name="button" value="deleteProject" type="submit">delete</button>
+        <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
+    </div>
     <div class="row">
         <div class="project col-lg-3">
             <h3 class="start-date">20/06/2021</h3>
             <% for (let i=0 ;i<projects.length ;i++) { %>
                 <div class="project-content" id="<%=i%>">
+                    <div class="close">
+                        <i class="far fa-times-circle"></i>
+                    </div>
                     <h2><%=projects[i].name%></h2>
                     <div class="next">
                         <i class="fas fa-long-arrow-alt-down"></i>
@@ -78,74 +86,26 @@
             <%}else {%>
                 <!-- content  -->
                 <% if (projects[projectId].content.length>0){ %>
-                    <!-- adding small projects -->
-                     <% let smallPrjecttype=0; %>
-                     <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                         <%  if (projects[projectId].content[i].contentType==="smallPrject"){ %>
-                             <% smallPrjecttype=1; %>
-                         <% } %>
-                      <% } %>
-                      <%if (smallPrjecttype===1){ %>
-                        <h2>small projects  :</h2>
-                        <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                            <% if (projects[projectId].content[i].contentType==="smallPrject"){ %>
-                                    <a href="<%=projects[projectId].content[0].contentLink%>">
-                                    <%=projects[projectId].content[i].contentName%></a>
-                                    <p><%=projects[projectId].content[i].cntentDate%></p>
-                            <% } %>
-                        <%}%>
-                    <% } %>   
-                     <!-- adding book -->
-                    <% let booktype=0; %>
-                    <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                        <%  if (projects[projectId].content[i].contentType==="book"){ %>
-                            <% booktype=1; %>
-                        <% } %>
-                     <% } %>
-                     <%if (booktype===1){ %>
-                       <h2>Books :</h2>
-                       <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                           <% if (projects[projectId].content[i].contentType==="book"){ %>
-                                   <a href="<%=projects[projectId].content[0].contentLink%>">
-                                   <%=projects[projectId].content[i].contentName%></a>
-                                   <p><%=projects[projectId].content[i].cntentDate%></p>
-                           <% } %>
-                       <%}%>
-                    <% } %>   
-                    <!-- adding course -->
-                    <% let coursetype=0; %>
-                    <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                        <%  if (projects[projectId].content[i].contentType==="course"){ %>
-                            <% coursetype=1; %>
-                        <% } %>
-                        <% } %>
-                        <%if (coursetype===1){ %>
-                        <h2>courses :</h2>
-                        <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                            <% if (projects[projectId].content[i].contentType==="course"){ %>
-                                    <a href="<%=projects[projectId].content[0].contentLink%>">
-                                    <%=projects[projectId].content[i].contentName%></a>
-                                    <p><%=projects[projectId].content[i].cntentDate%></p>
-                            <% } %>
-                        <%}%>
-                    <% } %>   
-                    <!-- adding video -->
-                    <% let videotype=0; %>
-                    <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                        <%  if (projects[projectId].content[i].contentType==="video"){ %>
-                            <% videotype=1; %>
-                        <% } %>
-                        <% } %>
-                        <%if (videotype===1){ %>
-                        <h2>video :</h2>
-                        <% for(let i=0;i<projects[projectId].content.length;i++){ %>
-                            <% if (projects[projectId].content[i].contentType==="video"){ %>
-                                    <a href="<%=projects[projectId].content[0].contentLink%>">
-                                    <%=projects[projectId].content[i].contentName%></a>
-                                    <p><%=projects[projectId].content[i].cntentDate%></p>
-                            <% } %>
-                        <%}%>
-                    <% } %>   
+                     <% let typeArray=["smallPrject","book","course","video"];%>
+                     <% let iconArray=["fas fa-project-diagram","fas fa-book","fas fa-chalkboard-teacher","fab fa-youtube"] %>
+                     <% for(let j=0;j<typeArray.length;j++){ %>
+                        <div class="type">
+                            <% for(let i=0;i<projects[projectId].content.length;i++){ %>
+                                <% if (projects[projectId].content[i].contentType===typeArray[j]){ %>
+                                    <div class="type-content">
+                                        <div class="icon">
+                                            <i class="<%= iconArray[j] %>"></i>
+                                        </div>
+                                        <div class="text">
+                                            <a href="<%= projects[projectId].content[0].contentLink %>">
+                                                <%= projects[projectId].content[i].contentName %></a>
+                                                <p><%= projects[projectId].content[i].cntentDate %></p>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>  
+                        </div> 
+                    <% } %>
                 <% } %>
                 <button class="btn add-content" >add content to your project.</button>
             <%}%>
