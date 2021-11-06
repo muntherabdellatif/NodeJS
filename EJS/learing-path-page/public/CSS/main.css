@@ -52,8 +52,8 @@ h1 {
   z-index: 100;
   cursor: pointer;
   position: absolute;
-  top: 8%;
-  left: -5%;
+  top: 16%;
+  left: -1%;
   font-size: 40px;
   color: red;
   display: none;
@@ -74,7 +74,6 @@ h1 {
   color: #777;
 }
 .project-content {
-  cursor: pointer;
   box-shadow: -5px 5px 9px 0px black;
   position: relative;
   padding: 125px;
@@ -95,6 +94,7 @@ h1 {
   color: black;
 }
 .project-content h2 {
+  cursor: pointer;
   font-size: 25px;
   color: white;
   font-weight: 600;
@@ -163,10 +163,26 @@ h1 {
   align-items: center;
   margin: 20px 15px;
 }
+.steps .type .type-content .icon {
+  position: relative;
+}
 .steps .type .type-content .icon i {
   margin-right: 11px;
   font-size: 60px;
   color: var(--color3);
+}
+.steps .type .type-content .icon .close {
+  position: absolute;
+  top: 0%;
+}
+.steps .type .type-content .icon .close i {
+  display: none;
+  font-size: 22px;
+  color: red;
+  cursor: pointer;
+}
+.steps .type .type-content:hover .icon .close i {
+  display: block;
 }
 .steps h2 {
   margin-top: 40px;
@@ -248,5 +264,26 @@ h1 {
   -o-border-radius: 10px;
 }
 .close-project-form.active {
+  top: 50%;
+}
+/* close content form */
+.close-content-form {
+  z-index: 100;
+  box-shadow: -5px 5px 9px 0px black;
+  border: 1px solid var(--color2);
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px 30px;
+  width: 51%;
+  background-color: var(--color1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.close-content-form.active {
   top: 50%;
 }

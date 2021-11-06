@@ -76,7 +76,7 @@ const projects = [
 
 ];
 let projectId = 0;
-
+let toDelete =0;
 app.set("views",path.join(__dirname,"views")); // set the file include ejs 
 app.set("view engine","ejs");
 
@@ -90,6 +90,7 @@ app.get("/",function (req,res) {
   res.render("index",{
       projects :projects ,
       projectId:projectId,
+      toDelete:toDelete ,
   });   // read ejs file
 });
 
@@ -122,6 +123,16 @@ app.post("/",function(req,res){
 });
 app.get(`/id/:postID`,function (req,res) {
   projectId = _.lowerCase( req.params.postID );
+  res.redirect("/");
+});
+app.get(`/deletedID/:postID`,function (req,res) {
+  deletedID = _.lowerCase( req.params.postID );
+  // console.log(deletedID);
+  projects.splice(deletedID,1);
+  res.redirect("/");
+});
+app.get(`/toDelete/:postID`,function (req,res) {
+  toDelete = _.lowerCase( req.params.postID );
   res.redirect("/");
 });
 app.listen(3000, function() {
