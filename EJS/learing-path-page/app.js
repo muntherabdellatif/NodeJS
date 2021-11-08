@@ -76,7 +76,10 @@ const projects = [
 
 ];
 let projectId = 0;
-let toDelete =0;
+let toDeleteProject =0;
+let toEditProject=0;
+let toDeleteProjectContent=0;
+let toEditProjectContent=0;
 app.set("views",path.join(__dirname,"views")); // set the file include ejs 
 app.set("view engine","ejs");
 
@@ -90,7 +93,10 @@ app.get("/",function (req,res) {
   res.render("index",{
       projects :projects ,
       projectId:projectId,
-      toDelete:toDelete ,
+      toDeleteProject:toDeleteProject ,
+      toDeleteProjectContent:toDeleteProjectContent ,
+      toEditProject:toEditProject,
+      toEditProjectContent:toEditProjectContent,
   });   // read ejs file
 });
 
@@ -104,7 +110,6 @@ app.post("/",function(req,res){
           content : [] 
       }
       projects.push(newProject);
-      console.log(projects);
     }else if (req.body.button === "addProjectContent"){
       const contentType = req.body.type ;
       const contentName =req.body.contentName ;
@@ -117,7 +122,20 @@ app.post("/",function(req,res){
         cntentDate :cntentDate 
       }
       projects[projectId].content.push(newContent);
-      console.log(projects);
+    }else if (req.body.button==="saveProject"){
+      projects[toEditProject].name=req.body.project ;
+      projects[toEditProject].date=req.body.projectDate ;
+      toEditProject=0;
+    }else if (req.body.button==="editProjectContent"){
+      projects[projectId].content[toEditProjectContent].contentType=req.body.type;
+      projects[projectId].content[toEditProjectContent].contentName=req.body.contentName;
+      projects[projectId].content[toEditProjectContent].contentLink=req.body.contentLink;
+      projects[projectId].content[toEditProjectContent].contentDate=req.body.contentDate;
+      toEditProjectContent=0;
+      projectId=0;
+    }else if (req.body.button==="deleteContent"){
+      projects[projectId].content.splice(toDeleteProjectContent,1);
+      projectId=0;
     }
     res.redirect("/");
 });
@@ -125,14 +143,29 @@ app.get(`/id/:postID`,function (req,res) {
   projectId = _.lowerCase( req.params.postID );
   res.redirect("/");
 });
+// delete project req
 app.get(`/deletedID/:postID`,function (req,res) {
-  deletedID = _.lowerCase( req.params.postID );
-  // console.log(deletedID);
-  projects.splice(deletedID,1);
+  projects.splice(toDeleteProject,1);
+  projectId=projects.length-1;
   res.redirect("/");
 });
-app.get(`/toDelete/:postID`,function (req,res) {
-  toDelete = _.lowerCase( req.params.postID );
+app.get(`/toDeleteProject/:postID`,function (req,res) {
+  toDeleteProject = _.lowerCase( req.params.postID );
+  res.redirect("/");
+});
+// edit project
+app.get(`/toEditProject/:postID`,function (req,res) {
+  toEditProject = _.lowerCase( req.params.postID );
+  res.redirect("/");
+});
+//delete content req
+app.get(`/deletedcontentID/:postID`,function (req,res) {
+  toDeleteProjectContent = _.lowerCase( req.params.postID );
+  res.redirect("/");
+});
+// edit content 
+app.get(`/editedcontentID/:postID`,function (req,res) {
+  toEditProjectContent = _.lowerCase( req.params.postID );
   res.redirect("/");
 });
 app.listen(3000, function() {

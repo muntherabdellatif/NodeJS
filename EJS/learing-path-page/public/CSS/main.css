@@ -61,6 +61,19 @@ h1 {
 .project .project-content:hover .close i {
   display: block;
 }
+.project .edit i {
+  z-index: 100;
+  cursor: pointer;
+  position: absolute;
+  bottom: 16%;
+  right: -1%;
+  font-size: 40px;
+  color: green;
+  display: none;
+}
+.project .project-content:hover .edit i {
+  display: block;
+}
 .start-date {
   color: #555;
   margin: -10px;
@@ -113,7 +126,8 @@ h1 {
 }
 
 /* next step form  */
-.new-project-form {
+.new-project-form,
+.edit-project-form {
   z-index: 100;
   box-shadow: -5px 5px 9px 0px black;
   border: 1px solid var(--color2);
@@ -130,22 +144,26 @@ h1 {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-.new-project-form.active {
+.new-project-form.active,
+.edit-project-form.active {
   top: 50%;
 }
-.new-project-form form {
+.new-project-form form,
+.edit-project-form form {
   width: 100%;
 }
-.new-project-form form .btn {
-  display: block;
+.new-project-form form .btn,
+.edit-project-form form .btn {
   margin: 20px auto;
 }
-.new-project-form form label {
+.new-project-form form label,
+.edit-project-form form label {
   font-size: 20px;
   margin-top: 10px;
   color: #333;
 }
-.new-project-form form input {
+.new-project-form form input,
+.edit-project-form form input {
   width: 100%;
   margin-top: 10px;
 }
@@ -173,7 +191,8 @@ h1 {
 }
 .steps .type .type-content .icon .close {
   position: absolute;
-  top: 0%;
+  top: 74%;
+  right: -22%;
 }
 .steps .type .type-content .icon .close i {
   display: none;
@@ -184,6 +203,20 @@ h1 {
 .steps .type .type-content:hover .icon .close i {
   display: block;
 }
+.steps .type .type-content .icon .edit {
+  position: absolute;
+  top: -25%;
+  right: -26%;
+}
+.steps .type .type-content .icon .edit i {
+  display: none;
+  font-size: 22px;
+  color: green;
+  cursor: pointer;
+}
+.steps .type .type-content:hover .icon .edit i {
+  display: block;
+}
 .steps h2 {
   margin-top: 40px;
   color: var(--color2);
@@ -192,8 +225,12 @@ h1 {
 .steps .add-content {
   width: 98%;
 }
+.steps .type .type-content .text {
+  margin-left: 20px;
+}
 /* new project content form */
-.new-project-content-form {
+.new-project-content-form,
+.edit-project-content-form {
   z-index: 100;
   box-shadow: -5px 5px 9px 0px black;
   border: 1px solid var(--color2);
@@ -210,37 +247,45 @@ h1 {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-.new-project-content-form.active {
+.new-project-content-form.active,
+.edit-project-content-form.active {
   top: 50%;
 }
-.new-project-content-form form {
+.new-project-content-form form,
+.edit-project-content-form form {
   width: 100%;
 }
-.new-project-content-form form .btn {
-  display: block;
+.new-project-content-form form .btn,
+.edit-project-content-form form .btn {
   margin: 20px auto;
 }
-.new-project-content-form form label {
+.new-project-content-form form label,
+.edit-project-content-form form label {
   font-size: 20px;
   margin-top: 10px;
   color: #333;
 }
-.new-project-content-form form label i {
+.new-project-content-form form label i,
+.edit-project-content-form form label i {
   width: 25px;
   margin-right: 10px;
   color: var(--color2);
 }
-.new-project-content-form form input {
+.new-project-content-form form input,
+.edit-project-content-form form input {
   width: 100%;
   margin-top: 10px;
 }
-.new-project-content-form .type input {
+.new-project-content-form .type input,
+.edit-project-content-form .type input {
   width: 10px;
 }
-.new-project-content-form .type label {
+.new-project-content-form .type label,
+.edit-project-content-form .type label {
   margin-top: 0px;
 }
-.new-project-content-form .content-type p {
+.new-project-content-form .content-type p,
+.edit-project-content-form .content-type p {
   font-size: 20px;
   margin: 10px 0px 5px;
   color: #333;
