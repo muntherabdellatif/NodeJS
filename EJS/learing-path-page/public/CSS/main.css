@@ -43,7 +43,31 @@ h1 {
   font-size: 3.5rem;
   font-weight: 900;
 }
-
+/* user name  */
+.userName {
+  color: #555;
+  position: fixed;
+  top: 23px;
+  right: 20px;
+}
+/* strating page */
+.starting-page {
+  text-align: center;
+  margin: 60px;
+}
+.starting-page .img {
+  margin: auto;
+  height: 398px;
+  width: 677px;
+  display: block;
+  margin-top: -11px;
+  background-image: url(../img/starting-page.jpg);
+  background-size: cover;
+  overflow: hidden;
+}
+.starting-page .login {
+  margin-right: 60px;
+}
 /* project */
 
 .project {
@@ -130,7 +154,8 @@ h1 {
 
 /* next step form  */
 .new-project-form,
-.edit-project-form {
+.edit-project-form,
+.loginForm {
   z-index: 100;
   box-shadow: -5px 5px 9px 0px black;
   border: 1px solid var(--color2);
@@ -148,25 +173,30 @@ h1 {
   -o-border-radius: 10px;
 }
 .new-project-form.active,
-.edit-project-form.active {
+.edit-project-form.active,
+.loginForm.active {
   top: 50%;
 }
 .new-project-form form,
-.edit-project-form form {
+.edit-project-form form,
+.loginForm form {
   width: 100%;
 }
 .new-project-form form .btn,
-.edit-project-form form .btn {
+.edit-project-form form .btn,
+.loginForm form .btn {
   margin: 20px auto;
 }
 .new-project-form form label,
-.edit-project-form form label {
+.edit-project-form form label,
+.loginForm form label {
   font-size: 20px;
   margin-top: 10px;
   color: #333;
 }
 .new-project-form form input,
-.edit-project-form form input {
+.edit-project-form form input,
+.loginForm form input {
   width: 100%;
   margin-top: 10px;
 }

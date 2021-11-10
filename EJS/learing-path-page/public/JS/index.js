@@ -3,6 +3,13 @@ let clickedPrjectID ;
 let deleteID;
 let editProjectID;
 // --------------------------------------------------------------------------
+// log in 
+const loginBtn =document.querySelector (".btn.login");
+const loginForm =document.querySelector(".loginForm");
+loginBtn.addEventListener("click",function () {
+    loginForm.classList.add("active");
+});
+// --------------------------------------------------------------------------
 // project 
 const projectContent = document.querySelectorAll (".project-content");
 const projectContentText =document.querySelectorAll (".project-content h2");

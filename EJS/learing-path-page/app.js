@@ -11,85 +11,92 @@ const _ =require("lodash");
 const app = express();
 const users= [
   {
+    userName:"" ,
+    userPassword:"" ,
+    startingDate:"",
+    projects : []
+  },
+  {
     userName:"MAbdellatif" ,
     userPassword:"monther.wind" ,
+    startingDate:"20/06/2021",
+    projects : [
+      {
+      name :"programming basics",
+      date :"2021-07-31",
+      content : [ {
+        contentType :"video" ,
+        contentName :"C++ basics",
+        contentLink :"contentLink" ,
+        contentDate :"2021-07-9" ,
+        contentStatus : "done"
+       } ,
+       {
+        contentType :"video" ,
+        contentName :"C++ OOP",
+        contentLink :"contentLink" ,
+        contentDate :"2021-07-20" ,
+        contentStatus : "done"
+       },
+       {
+        contentType :"video" ,
+        contentName :"C++ data stracture",
+        contentLink :"contentLink" ,
+        contentDate :"2021-07-20" ,
+        contentStatus : "done"
+       }
+      ]} ,
+      {
+        name :"web mern stack basics",
+        date :"2021-11-05",
+        content : [ {
+          contentType :"video" ,
+          contentName :"HTML",
+          contentLink :"contentLink" ,
+          contentDate :"2021-08-04" ,
+          contentStatus : "done"
+         } ,
+         {
+          contentType :"video" ,
+          contentName :"CSS",
+          contentLink :"contentLink" ,
+          contentDate :"2021-08-19" ,
+          contentStatus : "done"
+         },
+         {
+          contentType :"course" ,
+          contentName :"Web development bootcamp Udemy",
+          contentLink :"contentLink" ,
+          contentDate :"" ,
+          contentStatus : "inProgress" 
+         },
+         {
+          contentType :"smallPrject" ,
+          contentName :"HTML , CSS project 1",
+          contentLink :"contentLink" ,
+          contentDate :"2021-08-21" ,
+          contentStatus : "done" 
+         },
+         {
+          contentType :"smallPrject" ,
+          contentName :"HTML , CSS project 2",
+          contentLink :"contentLink" ,
+          contentDate :"2021-08-27" ,
+          contentStatus : "done" 
+         },
+         {
+          contentType :"video" ,
+          contentName :"Bootstrap",
+          contentLink :"contentLink" ,
+          contentDate :"2021-09-05" ,
+          contentStatus : "done" 
+         }
+        ]}
+    ]
   }
 ];
 
-let projects = [
-  {
-  name :"programming basics",
-  date :"2021-07-31",
-  content : [ {
-    contentType :"video" ,
-    contentName :"C++ basics",
-    contentLink :"contentLink" ,
-    contentDate :"2021-07-9" ,
-    contentStatus : "done"
-   } ,
-   {
-    contentType :"video" ,
-    contentName :"C++ OOP",
-    contentLink :"contentLink" ,
-    contentDate :"2021-07-20" ,
-    contentStatus : "done"
-   },
-   {
-    contentType :"video" ,
-    contentName :"C++ data stracture",
-    contentLink :"contentLink" ,
-    contentDate :"2021-07-20" ,
-    contentStatus : "done"
-   }
-  ]} ,
-  {
-    name :"web mern stack basics",
-    date :"2021-11-05",
-    content : [ {
-      contentType :"video" ,
-      contentName :"HTML",
-      contentLink :"contentLink" ,
-      contentDate :"2021-08-04" ,
-      contentStatus : "done"
-     } ,
-     {
-      contentType :"video" ,
-      contentName :"CSS",
-      contentLink :"contentLink" ,
-      contentDate :"2021-08-19" ,
-      contentStatus : "done"
-     },
-     {
-      contentType :"course" ,
-      contentName :"Web development bootcamp Udemy",
-      contentLink :"contentLink" ,
-      contentDate :"" ,
-      contentStatus : "inProgress" 
-     },
-     {
-      contentType :"smallPrject" ,
-      contentName :"HTML , CSS project 1",
-      contentLink :"contentLink" ,
-      contentDate :"2021-08-21" ,
-      contentStatus : "done" 
-     },
-     {
-      contentType :"smallPrject" ,
-      contentName :"HTML , CSS project 2",
-      contentLink :"contentLink" ,
-      contentDate :"2021-08-27" ,
-      contentStatus : "done" 
-     },
-     {
-      contentType :"video" ,
-      contentName :"Bootstrap",
-      contentLink :"contentLink" ,
-      contentDate :"2021-09-05" ,
-      contentStatus : "done" 
-     }
-    ]}
-];
-
+let userID=0;
 let projectId = 0;
 let toDeleteProject =0;
 let toEditProject=0;
@@ -105,9 +112,10 @@ app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/",function (req,res) {
-  console.log(projects.length);
   res.render("index",{
-      projects :projects ,
+      startingDate:users[userID].startingDate,
+      userName :users[userID].userName,
+      projects :users[userID].projects ,
       projectId:projectId,
       toDeleteProject:toDeleteProject ,
       toDeleteProjectContent:toDeleteProjectContent ,
@@ -125,7 +133,7 @@ app.post("/",function(req,res){
         date :newProjectDate,
         content : [] 
     }
-    projects.push(newProject);
+    users[userID].projects.push(newProject);
   }else if (req.body.button === "addProjectContent"){
     const contentType = req.body.type ;
     const contentName =req.body.contentName ;
@@ -138,20 +146,30 @@ app.post("/",function(req,res){
       contentDate :contentDate , 
       contentStatus : "notStarted" 
     }
-    projects[projectId].content.push(newContent);
+    users[userID].projects[projectId].content.push(newContent);
   }else if (req.body.button==="saveProject"){
-    projects[toEditProject].name=req.body.project || projects[toEditProject].name;
-    projects[toEditProject].date=req.body.projectDate  || projects[toEditProject].date;
+    users[userID].projects[toEditProject].name=req.body.project || users[userID].projects[toEditProject].name;
+    users[userID].projects[toEditProject].date=req.body.projectDate  || users[userID].projects[toEditProject].date;
     toEditProject=0;
   }else if (req.body.button==="editProjectContent"){
-    projects[projectId].content[toEditProjectContent].contentType=req.body.type || projects[projectId].content[toEditProjectContent].contentType;
-    projects[projectId].content[toEditProjectContent].contentName=req.body.contentName || projects[projectId].content[toEditProjectContent].contentName;
-    projects[projectId].content[toEditProjectContent].contentLink=req.body.contentLink || projects[projectId].content[toEditProjectContent].contentLink;
-    projects[projectId].content[toEditProjectContent].contentDate=req.body.contentDate || projects[projectId].content[toEditProjectContent].contentDate;
+    users[userID].projects[projectId].content[toEditProjectContent].contentType=req.body.type || users[userID].projects[projectId].content[toEditProjectContent].contentType;
+    users[userID].projects[projectId].content[toEditProjectContent].contentName=req.body.contentName || users[userID].projects[projectId].content[toEditProjectContent].contentName;
+    users[userID].projects[projectId].content[toEditProjectContent].contentLink=req.body.contentLink || users[userID].projects[projectId].content[toEditProjectContent].contentLink;
+    users[userID].projects[projectId].content[toEditProjectContent].contentDate=req.body.contentDate || users[userID].projects[projectId].content[toEditProjectContent].contentDate;
     toEditProjectContent=0;
     projectId=0;
   }else if (req.body.button==="deleteContent"){
-    projects[projectId].content.splice(toDeleteProjectContent,1);
+    users[userID].projects[projectId].content.splice(toDeleteProjectContent,1);
+  }else if (req.body.button === "login"){
+    const loginUserName = req.body.userName ;
+    const loginPassword = req.body.password ;
+    for (let i=0;i<users.length;i++){
+      if (users[i].userName===loginUserName){
+        if (users[i].userPassword===loginPassword){
+          userID=i;
+        }
+      }
+    }
   }
   res.redirect("/");
 });
@@ -162,8 +180,8 @@ app.get(`/id/:postID`,function (req,res) {
 });
 // delete project req
 app.get(`/deletedID/:postID`,function (req,res) {
-  projects.splice(toDeleteProject,1);
-  projectId=projects.length-1;
+  users[userID].projects.splice(toDeleteProject,1);
+  projectId=users[userID].projects.length-1;
   res.redirect("/");
 });
 app.get(`/toDeleteProject/:postID`,function (req,res) {
@@ -188,12 +206,12 @@ app.get(`/editedcontentID/:postID`,function (req,res) {
 // change content status  
 app.get(`/chengeContentStatusID/:postID`,function (req,res) {
   let tochange = _.lowerCase( req.params.postID );
-  if (projects[projectId].content[tochange].contentStatus==="notStarted"){
-    projects[projectId].content[tochange].contentStatus="inProgress";
-  }else if (projects[projectId].content[tochange].contentStatus==="inProgress"){
-    projects[projectId].content[tochange].contentStatus="done";
-  }else if (projects[projectId].content[tochange].contentStatus==="done"){
-    projects[projectId].content[tochange].contentStatus="notStarted";
+  if (users[userID].projects[projectId].content[tochange].contentStatus==="notStarted"){
+    users[userID].projects[projectId].content[tochange].contentStatus="inProgress";
+  }else if (users[userID].projects[projectId].content[tochange].contentStatus==="inProgress"){
+    users[userID].projects[projectId].content[tochange].contentStatus="done";
+  }else if (users[userID].projects[projectId].content[tochange].contentStatus==="done"){
+    users[userID].projects[projectId].content[tochange].contentStatus="notStarted";
   }
   res.redirect("/");
 });

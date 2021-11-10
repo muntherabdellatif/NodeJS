@@ -16,6 +16,34 @@
 </head>
 <body>
     <h1>learning path</h1>
+    <% if (!userName){ %>
+        <div class="starting-page">
+            <h2>Wilcome in learing path page </h2>
+            <h3>With us, You can monitor and improve the self-learing process by setting goals
+            and constantly monitoring your achievement </h3>
+            <button class="btn login">login</button>
+            <button class="btn signin">signin</button>
+            <div class="img"></div>
+        </div> 
+    <%}else{%>
+        <div class="starting-page hidden"></div>
+            <button class="btn login hidden">login</button>
+            <button class="btn signin hidden">signin</button>
+        </div> 
+    <%}%>
+    <div class="loginForm">
+        <form action="/" method="post">
+            <label for="userName">User name</label>
+            <input type="text" name="userName"id="userName" >
+            <label for="password">Password</label>
+            <input type="text" name="password" id="Password">
+            <button class="btn login" name="button" value="login" >login</button>
+            <button class="btn cancel" name="button" value="cancel">cancel</button>
+        </form>
+    </div>
+    <div class="userName">
+      <h5><i class="fas fa-user"></i> <%=userName%></h5>   
+    </div>
     <div class="new-project-form">
         <form action="/" method="post">
             <label for="project">Your next step</label>
@@ -139,7 +167,7 @@
     </div>
     <div class="row">
         <div class="project col-lg-3">
-            <h3 class="start-date">20/06/2021</h3>
+            <h3 class="start-date"><%=startingDate%></h3>
             <% for (let i=0 ;i<projects.length ;i++) { %>
                 <div class="project-content" data-id="<%=i%>">
                     <div class="close">
@@ -155,12 +183,21 @@
                     <h3 class="end-date"><%=projects[i].date%></h3>
                 </div>
             <%}%>
-            <button class="btn" type="submit" name="add-new">add new project</button>
+            <%if (userName){%>
+                <button class="btn " type="submit" name="add-new">add new project</button>
+            <%}else{%>
+                <button class="btn hidden" type="submit" name="add-new">add new project</button>
+            <%}%>
         </div>
         <div class="steps col-lg-9">
             <% if (projects.length===0){ %>
-                <h2>Wilcome.</h2>
-                <p>press add-new button to add project in your page.</p>
+                <%if (userName){%>
+                    <h2>Wilcome.</h2>
+                    <p>press add-new button to add project in your page.</p>
+                <%}else{%>
+                    <h2 class="hidden">Wilcome.</h2>
+                    <p class="hidden">press add-new button to add project in your page.</p>
+                <%}%>
                 <button class="btn add-content hidden" >add content to your project.</button>
             <%}else {%>
                 <!-- content  -->
