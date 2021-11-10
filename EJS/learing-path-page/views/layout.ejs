@@ -101,6 +101,8 @@
                         <h2> edit (<%=projects[projectId].content[toEditProjectContent].contentName%>)</h2>
                         <p>Any field whose content you do not want to change leave it as is.</p>
                 <p>sellect content type ( Current content type :<%=projects[projectId].content[toEditProjectContent].contentType%>) </p>
+                    <%}%>
+                <%}%>
                 <div class="type">
                     <input type="radio" name="type" value="smallPrject" id="small-project">
                     <label for="small-porject"><i class="fas fa-project-diagram"></i> small project</label>
@@ -118,6 +120,8 @@
                     <label for="video"><i class="fab fa-youtube"></i>   video</label>
                 </div>
             </div>
+            <%if (projects[projectId]) {%>
+                <% if (toEditProjectContent < projects[projectId].content.length) { %>
             <label for="content-name">content name</label>
             <input type="text" name="contentName" id="content-name" autocomplete="off"
             placeholder="<%=projects[projectId].content[toEditProjectContent].contentName%>" >
@@ -129,8 +133,8 @@
             <p>Current content date : (<%=projects[projectId].content[toEditProjectContent].contentDate%>)</p>
             <button class="btn add" type="submit" name="button" value="editProjectContent">save</button>
             <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
-                    <%}%>
                 <%}%>
+            <%}%>
         </form>
     </div>
     <div class="row">
