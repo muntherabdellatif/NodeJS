@@ -13,7 +13,6 @@
      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
      <!-- main css  -->
     <link rel="stylesheet" href="CSS/main.css">
-
 </head>
 <body>
     <h1>learning path</h1>
@@ -30,11 +29,15 @@
     <div class="edit-project-form ">
         <form action="/" method="post">
             <%if (projects.length) { %>
+               <% if (toEditProject<projects.length){%>
                 <h2>Edit ( <%=projects[toEditProject].name%> ) project</h2>
+                <p>Any field whose content you do not want to change leave it as is.</p>
                 <label for="project">Project name</label>
                 <input type="text" id="project" name="project" placeholder="<%=projects[toEditProject].name%>" autocomplete="off">
                 <label for="projectDate">Expected date to end it</label>
                 <input type="date" name="projectDate" id="date">
+                <p>Current project date : <%=projects[toEditProject].date%></p>
+                <%}%>
             <%}%>
             <button class="btn save" type="submit" name="button" value="saveProject">save</button>
             <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
@@ -63,9 +66,9 @@
                 </div>
             </div>
             <label for="content-name">content name</label>
-            <input type="text" name="contentName" id="content-name">
+            <input type="text" name="contentName" id="content-name" autocomplete="off">
             <label for="content-link">content link</label>
-            <input type="text" name="contentLink" id="content-link">
+            <input type="text" name="contentLink" id="content-link" autocomplete="off">
             <label for="content-date">content date</label>
             <input type="date" name="contentDate" id="content-date">
             <button class="btn add" type="submit" name="button" value="addProjectContent">add</button>
@@ -96,9 +99,8 @@
                 <%if (projects[projectId]) {%>
                     <% if (toEditProjectContent < projects[projectId].content.length) { %>
                         <h2> edit (<%=projects[projectId].content[toEditProjectContent].contentName%>)</h2>
-                    <%}%>
-                <%}%>
-                <p>sellect content type</p>
+                        <p>Any field whose content you do not want to change leave it as is.</p>
+                <p>sellect content type ( Current content type :<%=projects[projectId].content[toEditProjectContent].contentType%>) </p>
                 <div class="type">
                     <input type="radio" name="type" value="smallPrject" id="small-project">
                     <label for="small-porject"><i class="fas fa-project-diagram"></i> small project</label>
@@ -117,13 +119,18 @@
                 </div>
             </div>
             <label for="content-name">content name</label>
-            <input type="text" name="contentName" id="content-name">
+            <input type="text" name="contentName" id="content-name" autocomplete="off"
+            placeholder="<%=projects[projectId].content[toEditProjectContent].contentName%>" >
             <label for="content-link">content link</label>
-            <input type="text" name="contentLink" id="content-link">
+            <input type="text" name="contentLink" id="content-link" autocomplete="off"
+            placeholder="<%=projects[projectId].content[toEditProjectContent].contentLink%>" >
             <label for="content-date">content date</label>
             <input type="date" name="contentDate" id="content-date">
+            <p>Current content date : (<%=projects[projectId].content[toEditProjectContent].contentDate%>)</p>
             <button class="btn add" type="submit" name="button" value="editProjectContent">save</button>
             <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
+                    <%}%>
+                <%}%>
         </form>
     </div>
     <div class="row">
@@ -173,7 +180,16 @@
                                         <div class="text">
                                             <a href="<%= projects[projectId].content[0].contentLink %>">
                                                 <%= projects[projectId].content[i].contentName %></a>
-                                                <p><%= projects[projectId].content[i].cntentDate %></p>
+                                                <p><%= projects[projectId].content[i].contentDate %></p>
+                                                <div class="status" data-id="<%=i%>">
+                                                    <%if (projects[projectId].content[i].contentStatus === "done"){%>
+                                                        <p> done ✔️</p>
+                                                    <%}else if (projects[projectId].content[i].contentStatus === "inProgress"){%>
+                                                        <p> in progress 🛠️</p>
+                                                    <%}else if (projects[projectId].content[i].contentStatus === "notStarted"){%>
+                                                        <p> not started ⏰</p>
+                                                    <%}%>
+                                                </div>
                                         </div>
                                     </div>
                                 <% } %>
@@ -192,6 +208,5 @@
     crossorigin="anonymous"></script>
     <!-- main js  -->
     <script src="JS/index.js"></script>
-
 </body>
 </html>

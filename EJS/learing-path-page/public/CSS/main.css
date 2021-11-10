@@ -17,6 +17,9 @@ html {
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
 }
+p {
+  margin-bottom: 0;
+}
 .hidden {
   display: none;
 }
@@ -227,6 +230,9 @@ h1 {
 }
 .steps .type .type-content .text {
   margin-left: 20px;
+}
+.steps .type .type-content .text .status {
+  cursor: pointer;
 }
 /* new project content form */
 .new-project-content-form,

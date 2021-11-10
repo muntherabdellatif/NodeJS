@@ -1,48 +1,16 @@
-// project 
-const projectContent = document.querySelectorAll (".project-content");
-const projectContentText =document.querySelectorAll (".project-content h2");
-// project Btn
-const addNewProjectBtn = document.querySelector(".project .btn");
-const deleteProjectBtn =document.querySelectorAll(".project-content .close i");
-const editProjectBtn =document.querySelectorAll(".project-content .edit i");
-// add project form 
-const newProjectForm = document.querySelector (".new-project-form");
-const addProjectFormBtn =document.querySelector(".new-project-form .add");
-const cancelProjectFormBtn =document.querySelector(".new-project-form .cancel");
-// delete project from
-const deleteProjectForm =document.querySelector(".close-project-form");
-const cancelDeleteProjectBtn =document.querySelector(".close-project-form .cancel");
-const deleteProjectFormBtn =document.querySelector(".close-project-form .delete");
-// edit project form 
-const editProjectForm =document.querySelector(".edit-project-form");
-const editProjectFormSavePtn =document.querySelector(".edit-project-form .save");
-const editProjectFormCancelPtn =document.querySelector(".edit-project-form .cancel");
-// content 
-const addContentBtn =document.querySelector(".add-content");
-const deleteContentBtn = document.querySelectorAll(".steps .type .type-content .icon .close i");
-const editContentBtn =document.querySelectorAll(".steps .type .type-content .icon .edit i");
-// add content form
-const addContentForm =document.querySelector(".new-project-content-form");
-const addContentFormBtn =document.querySelector(".new-project-content-form .add ");
-const cancelAddingContentFormBtn =document.querySelector(".new-project-content-form .cancel");
-// delete content form 
-const deleteContentForm = document.querySelector(".close-content-form");
-const deleteProjectContentFormBtn =document.querySelector(".close-content-form .delete");
-const cancleDeleteContentFormBtn =document.querySelector(".close-content-form .cancel");
-// edit content form 
-const editProjectContentForm =document.querySelector(".edit-project-content-form");
-const saveEditProjectContemt =document.querySelector(".edit-project-content-form .add");
-const cancelEditProjectContemt =document.querySelector(".edit-project-content-form .cancel");
 // variables 
 let clickedPrjectID ;
 let deleteID;
 let editProjectID;
+// --------------------------------------------------------------------------
+// project 
+const projectContent = document.querySelectorAll (".project-content");
+const projectContentText =document.querySelectorAll (".project-content h2");
 // make project active
 projectContentText.forEach ((s)=>{
     s.addEventListener("click",function () {
         projectContent.forEach((s)=>s.classList.remove("active"));
         clickedPrjectID = this.dataset.id;
-        console.log(clickedPrjectID);
         projectContent[clickedPrjectID].classList.add("active");
         window.location.pathname=(`/id/${clickedPrjectID}`);
         window.localStorage.currentProjectId =clickedPrjectID ;
@@ -54,7 +22,13 @@ if (projectContent.length !==0 && window.localStorage.currentProjectId<projectCo
 }else {
     window.localStorage.currentProjectId=0;
 }
+// -----------------------------------------------------------------------------
 // add project
+const addNewProjectBtn = document.querySelector(".project .btn");
+const newProjectForm = document.querySelector (".new-project-form");
+const addProjectFormBtn =document.querySelector(".new-project-form .add");
+const cancelProjectFormBtn =document.querySelector(".new-project-form .cancel");
+
 addNewProjectBtn.addEventListener("click",function () {
     newProjectForm.classList.add("active");
 });
@@ -64,10 +38,16 @@ addProjectFormBtn.addEventListener("click",function () {
 cancelProjectFormBtn.addEventListener("click",function () {
     newProjectForm.classList.remove("active");
 });
+// -------------------------------------------------------------------------------
 // delete project 
+const deleteProjectBtn =document.querySelectorAll(".project-content .close i");
+const deleteProjectForm =document.querySelector(".close-project-form");
+const deleteProjectFormBtn =document.querySelector(".close-project-form .delete");
+
 for (let i=0;i<deleteProjectBtn.length;i++){
     deleteProjectBtn[i].addEventListener("click",function () {
         deleteID=this.dataset.id;
+        window.localStorage.deletedProject=deleteID;
         window.localStorage.deleteFormstatus="open";
         window.location.pathname=(`/toDeleteProject/${deleteID}`);
     });
@@ -78,37 +58,48 @@ if ( window.localStorage.deleteFormstatus==="open"){
 }
 deleteProjectFormBtn.addEventListener("click",function () {
     deleteProjectForm.classList.remove("active");
+    deleteID= window.localStorage.deletedProject;
     window.location.pathname=(`/deletedID/${deleteID}`);
 });
 // cancel deleting the project
+const cancelDeleteProjectBtn =document.querySelector(".close-project-form .cancel");
+
 cancelDeleteProjectBtn.addEventListener("click",function () {
     deleteProjectForm.classList.remove("active");
 });
+// -----------------------------------------------------------------------------
 // edit project 
+const editProjectBtn =document.querySelectorAll(".project-content .edit i");
+const editProjectForm =document.querySelector(".edit-project-form");
+const editProjectFormSavePtn =document.querySelector(".edit-project-form .save");
+const editProjectFormCancelPtn =document.querySelector(".edit-project-form .cancel");
+
 for (let i=0;i<editProjectBtn.length;i++){
-     editProjectBtn[i].addEventListener("click",function () {
-        editProjectID=this.dataset.id;
-        window.localStorage.editProjectFormstatus="open";
-        window.location.pathname=(`/toEditProject/${editProjectID}`);
-    });
+    editProjectBtn[i].addEventListener("click",function () {
+       editProjectID=this.dataset.id;
+       window.localStorage.editProjectFormstatus="open";
+       window.location.pathname=(`/toEditProject/${editProjectID}`);
+   });
 }
 if ( window.localStorage.editProjectFormstatus==="open"){
-    editProjectForm.classList.add("active");
-    window.localStorage.editProjectFormstatus="close";
+   editProjectForm.classList.add("active");
+   window.localStorage.editProjectFormstatus="close";
 }
 editProjectFormSavePtn.addEventListener("click",function () {
-    editProjectForm.classList.remove("active");
-    window.location.pathname=(`/`);
+   editProjectForm.classList.remove("active");
+   window.location.pathname=(`/`);
 });
-// cancel ededing project
+// cancel editing project
 editProjectFormCancelPtn.addEventListener("click",function () {
-    editProjectForm.classList.remove("active");
+   editProjectForm.classList.remove("active");
 });
-// cancel deleting the project
-cancelDeleteProjectBtn.addEventListener("click",function () {
-    deleteProjectForm.classList.remove("active");
-});
+// -----------------------------------------------------------------------
 // add content
+const addContentBtn =document.querySelector(".add-content"); 
+const addContentForm =document.querySelector(".new-project-content-form");
+const addContentFormBtn =document.querySelector(".new-project-content-form .add ");
+const cancelAddingContentFormBtn =document.querySelector(".new-project-content-form .cancel");
+
 addContentBtn.addEventListener("click",function () {
     addContentForm.classList.add("active");
 });
@@ -119,6 +110,12 @@ addContentFormBtn.addEventListener("click",function () {
 cancelAddingContentFormBtn.addEventListener("click",function () {
     addContentForm.classList.remove("active");
 });
+// --------------------------------------------------------------------------
+const deleteContentBtn = document.querySelectorAll(".steps .type .type-content .icon .close i");
+const deleteContentForm = document.querySelector(".close-content-form");
+const deleteProjectContentFormBtn =document.querySelector(".close-content-form .delete");
+const cancleDeleteContentFormBtn =document.querySelector(".close-content-form .cancel");
+
 // delete content 
 deleteContentBtn.forEach((btn)=>{
     btn.addEventListener("click",function () {
@@ -139,7 +136,13 @@ deleteProjectContentFormBtn.addEventListener("click",function () {
 cancleDeleteContentFormBtn.addEventListener("click",function () {
     deleteContentForm.classList.remove("active");
 });
+// ----------------------------------------------------------------------------
 // edit project content 
+const editContentBtn =document.querySelectorAll(".steps .type .type-content .icon .edit i");
+const editProjectContentForm =document.querySelector(".edit-project-content-form");
+const saveEditProjectContemt =document.querySelector(".edit-project-content-form .add");
+const cancelEditProjectContent =document.querySelector(".edit-project-content-form .cancel");
+
 editContentBtn.forEach((btn)=>{
     btn.addEventListener("click",function () {
         let editContentID = this.dataset.id;
@@ -151,11 +154,25 @@ if (window.localStorage.editContentFormstatus==="open"){
     editProjectContentForm.classList.add("active");
     window.localStorage.editContentFormstatus="close";
 }
-deleteProjectContentFormBtn.addEventListener("click",function () {
-    editProjectContentForm.classList.remove("active");
-    window.location.pathname=(`/`);
-});
+if (saveEditProjectContemt){
+    saveEditProjectContemt.addEventListener("click",function () {
+        editProjectContentForm.classList.remove("active");
+        window.location.pathname=(`/`);
+    });
+}
 // cancel editting content 
-cancelEditProjectContemt.addEventListener("click",function () {
-    editProjectContentForm.classList.remove("active");
+if (cancelEditProjectContent){
+    cancelEditProjectContent.addEventListener("click",function () {
+        editProjectContentForm.classList.remove("active");
+    });
+}
+// --------------------------------------------------------------------------
+// changeing content status
+const contentStatus =document.querySelectorAll(".steps .type .type-content .text .status");
+
+contentStatus.forEach((btn)=>{
+    btn.addEventListener("click",function () {
+        let chengeContentStatusID = this.dataset.id;
+        window.location.pathname=(`/chengeContentStatusID/${chengeContentStatusID}`);
+    });
 });
