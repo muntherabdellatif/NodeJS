@@ -155,7 +155,8 @@ h1 {
 /* next step form  */
 .new-project-form,
 .edit-project-form,
-.loginForm {
+.loginForm,
+.signUpForm {
   z-index: 100;
   box-shadow: -5px 5px 9px 0px black;
   border: 1px solid var(--color2);
@@ -174,31 +175,40 @@ h1 {
 }
 .new-project-form.active,
 .edit-project-form.active,
-.loginForm.active {
+.loginForm.active,
+.signUpForm.active {
   top: 50%;
 }
 .new-project-form form,
 .edit-project-form form,
-.loginForm form {
+.loginForm form,
+.signUpForm form {
   width: 100%;
 }
 .new-project-form form .btn,
 .edit-project-form form .btn,
-.loginForm form .btn {
+.loginForm form .btn,
+.signUpForm form .btn {
   margin: 20px auto;
 }
 .new-project-form form label,
 .edit-project-form form label,
-.loginForm form label {
+.loginForm form label,
+.signUpForm form label {
   font-size: 20px;
   margin-top: 10px;
   color: #333;
 }
 .new-project-form form input,
 .edit-project-form form input,
-.loginForm form input {
+.loginForm form input,
+.signUpForm form input {
   width: 100%;
   margin-top: 10px;
+}
+.signup-massege,
+.login-massege {
+  color: red;
 }
 /* steps */
 .steps {
@@ -367,4 +377,8 @@ h1 {
 }
 .close-content-form.active {
   top: 50%;
+}
+#signout {
+  text-decoration: none;
+  cursor: pointer;
 }

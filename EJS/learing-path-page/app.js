@@ -95,7 +95,8 @@ const users= [
     ]
   }
 ];
-
+let SignUpErrorMassege="";
+let loginErrorMassege="";
 let userID=0;
 let projectId = 0;
 let toDeleteProject =0;
@@ -121,6 +122,8 @@ app.get("/",function (req,res) {
       toDeleteProjectContent:toDeleteProjectContent ,
       toEditProject:toEditProject,
       toEditProjectContent:toEditProjectContent,
+      loginErrorMassege:loginErrorMassege,
+      SignUpErrorMassege:SignUpErrorMassege,
   });   // read ejs file
 });
 
@@ -167,13 +170,45 @@ app.post("/",function(req,res){
       if (users[i].userName===loginUserName){
         if (users[i].userPassword===loginPassword){
           userID=i;
+          loginErrorMassege="";
         }
       }
     }
+    if (userID===0){
+      loginErrorMassege="the password or user name is wrong!";
+    }
+  }else if (req.body.button === "signUp"){
+    const loginUserName = req.body.userName ;
+    const loginPassword = req.body.password ;
+    const Confirmpassword = req.body.Confirmpassword ;
+    if (loginPassword===Confirmpassword){
+      let today =new Date();
+      let dayInMonth =today.getDate();
+      let month =today.getMonth();
+      let year =today.getFullYear();
+      let todayDate= `${dayInMonth}/${month+1}/${year}`;
+      let newuser={
+        userName: loginUserName ,
+        userPassword: loginPassword ,
+        startingDate: todayDate,
+        projects : []
+      };
+      users.push(newuser);
+      userID=users.length-1;
+      SignUpErrorMassege="";
+    }else {
+      SignUpErrorMassege="the passwords not match!";
+    }
+  }else if (req.body.button === "cancelLogin" || req.body.button === "cancelSignUp") {
+    SignUpErrorMassege="";
+    loginErrorMassege="";
   }
   res.redirect("/");
 });
-
+app.get("/signout",function(req,res){
+  userID=0;
+  res.redirect("/");
+});
 app.get(`/id/:postID`,function (req,res) {
   projectId = _.lowerCase( req.params.postID );
   res.redirect("/");

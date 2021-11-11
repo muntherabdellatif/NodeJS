@@ -5,10 +5,35 @@ let editProjectID;
 // --------------------------------------------------------------------------
 // log in 
 const loginBtn =document.querySelector (".btn.login");
+const cancelLoginBtn =document.querySelector (".btn.cancel-login");
 const loginForm =document.querySelector(".loginForm");
+const loginMassege =document.querySelector(".login-massege");
 loginBtn.addEventListener("click",function () {
     loginForm.classList.add("active");
 });
+cancelLoginBtn.addEventListener("click",function () {
+    loginForm.classList.remove("active");
+    loginMassege.textContent="";
+});
+if (loginMassege.textContent!==""){
+    loginForm.classList.add("active");
+}
+// --------------------------------------------------------------------------
+// sign up form  
+const signUpBtn =document.querySelector (".btn.signUp");
+const cancelsignUpBtn =document.querySelector (".btn.cancel-signUp");
+const signUpForm =document.querySelector(".signUpForm");
+const signupMassege =document.querySelector(".signup-massege");
+signUpBtn.addEventListener("click",function () {
+    signUpForm.classList.add("active");
+});
+cancelsignUpBtn.addEventListener("click",function () {
+    signUpForm.classList.remove("active");
+    signupMassege.textContent="";
+});
+if (signupMassege.textContent!==""){
+    signUpForm.classList.add("active");
+}
 // --------------------------------------------------------------------------
 // project 
 const projectContent = document.querySelectorAll (".project-content");

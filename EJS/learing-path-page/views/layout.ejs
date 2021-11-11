@@ -16,40 +16,67 @@
 </head>
 <body>
     <h1>learning path</h1>
+    <!-- strating page -->
     <% if (!userName){ %>
         <div class="starting-page">
             <h2>Wilcome in learing path page </h2>
             <h3>With us, You can monitor and improve the self-learing process by setting goals
             and constantly monitoring your achievement </h3>
             <button class="btn login">login</button>
-            <button class="btn signin">signin</button>
+            <button class="btn signUp">sign in</button>
             <div class="img"></div>
         </div> 
     <%}else{%>
-        <div class="starting-page hidden"></div>
+        <div class="starting-page hidden">
             <button class="btn login hidden">login</button>
-            <button class="btn signin hidden">signin</button>
+            <button class="btn signUp hidden">sign in</button>
         </div> 
     <%}%>
+    <!-- log in form -->
     <div class="loginForm">
         <form action="/" method="post">
-            <label for="userName">User name</label>
-            <input type="text" name="userName"id="userName" >
-            <label for="password">Password</label>
-            <input type="text" name="password" id="Password">
+            <label >User name</label>
+            <input type="text" name="userName" >
+            <label >Password</label>
+            <input type="password" name="password" >
             <button class="btn login" name="button" value="login" >login</button>
-            <button class="btn cancel" name="button" value="cancel">cancel</button>
+            <button class="btn cancel-login" name="button" value="cancelLogin">cancel</button>
+            <p class="login-massege"><%=loginErrorMassege%></p>
         </form>
     </div>
-    <div class="userName">
-      <h5><i class="fas fa-user"></i> <%=userName%></h5>   
+    <!-- sign up form -->
+    <div class="signUpForm">
+        <form action="/" method="post">
+            <label >User name</label>
+            <input type="text" name="userName" >
+            <label >Password</label>
+            <input type="password" name="password" >
+            <label for="Confirmpassword">Confirm the Password</label>
+            <input type="password" name="Confirmpassword" id="Confirmpassword">
+            <button class="btn signUp" name="button" value="signUp" >sign up</button>
+            <button class="btn cancel-signUp" name="button" value="cancelSignUp">cancel</button>
+            <p class="signup-massege"><%=SignUpErrorMassege%></p>
+        </form>
     </div>
+    <!-- user name and log out  -->
+    <%if (userName===""){%>
+        <div class="userName hidden">
+            <h5><i class="fas fa-user"></i> <%=userName%></h5>   
+            <a href="/signout" id="signout">sign out</a>
+          </div>
+    <%}else {%>
+        <div class="userName">
+            <h5><i class="fas fa-user"></i> <%=userName%></h5>   
+            <a href="/signout" id="signout">sign out</a>
+          </div>
+    <%}%>
+    <!-- forms -->
     <div class="new-project-form">
         <form action="/" method="post">
-            <label for="project">Your next step</label>
-            <input type="text" id="project" name="project" autocomplete="off">
-            <label for="projectDate">Expected date to end it</label>
-            <input type="date" name="projectDate" id="date">
+            <label >Your next step</label>
+            <input type="text" name="project" autocomplete="off">
+            <label >Expected date to end it</label>
+            <input type="date" name="projectDate">
             <button class="btn add" type="submit" name="button" value="addProject">add</button>
             <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
         </form>
@@ -60,10 +87,10 @@
                <% if (toEditProject<projects.length){%>
                 <h2>Edit ( <%=projects[toEditProject].name%> ) project</h2>
                 <p>Any field whose content you do not want to change leave it as is.</p>
-                <label for="project">Project name</label>
-                <input type="text" id="project" name="project" placeholder="<%=projects[toEditProject].name%>" autocomplete="off">
-                <label for="projectDate">Expected date to end it</label>
-                <input type="date" name="projectDate" id="date">
+                <label >Project name</label>
+                <input type="text"  name="project" placeholder="<%=projects[toEditProject].name%>" autocomplete="off">
+                <label >Expected date to end it</label>
+                <input type="date" name="projectDate" >
                 <p>Current project date : <%=projects[toEditProject].date%></p>
                 <%}%>
             <%}%>
@@ -93,12 +120,12 @@
                     <label for="video"><i class="fab fa-youtube"></i>   video</label>
                 </div>
             </div>
-            <label for="content-name">content name</label>
-            <input type="text" name="contentName" id="content-name" autocomplete="off">
-            <label for="content-link">content link</label>
-            <input type="text" name="contentLink" id="content-link" autocomplete="off">
-            <label for="content-date">content date</label>
-            <input type="date" name="contentDate" id="content-date">
+            <label>content name</label>
+            <input type="text" name="contentName"  autocomplete="off">
+            <label >content link</label>
+            <input type="text" name="contentLink" autocomplete="off">
+            <label >content date</label>
+            <input type="date" name="contentDate" >
             <button class="btn add" type="submit" name="button" value="addProjectContent">add</button>
             <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
         </form>
@@ -132,32 +159,32 @@
                     <%}%>
                 <%}%>
                 <div class="type">
-                    <input type="radio" name="type" value="smallPrject" id="small-project">
-                    <label for="small-porject"><i class="fas fa-project-diagram"></i> small project</label>
+                    <input type="radio" name="type" value="smallPrject" id="small-project-edit">
+                    <label for="small-porject-edit"><i class="fas fa-project-diagram"></i> small project</label>
                 </div>
                 <div class="type">
-                    <input type="radio" name="type" value="book" id="book">
-                    <label for="book"><i class="fas fa-book"></i>   book</label>
+                    <input type="radio" name="type" value="book" id="book-edit">
+                    <label for="book-edit"><i class="fas fa-book"></i>   book</label>
                 </div>
                 <div class="type">
-                    <input type="radio" name="type" value="course" id="course">
-                    <label for="course"><i class="fas fa-chalkboard-teacher"></i> course</label>
+                    <input type="radio" name="type" value="course" id="course-edit">
+                    <label for="course-edit"><i class="fas fa-chalkboard-teacher"></i> course</label>
                 </div>
                 <div class="type">
-                    <input type="radio" name="type" value="video" id="video">
-                    <label for="video"><i class="fab fa-youtube"></i>   video</label>
+                    <input type="radio" name="type" value="video" id="video-edit">
+                    <label for="video-edit"><i class="fab fa-youtube"></i>   video</label>
                 </div>
             </div>
             <%if (projects[projectId]) {%>
                 <% if (toEditProjectContent < projects[projectId].content.length) { %>
-            <label for="content-name">content name</label>
-            <input type="text" name="contentName" id="content-name" autocomplete="off"
+            <label >content name</label>
+            <input type="text" name="contentName" autocomplete="off"
             placeholder="<%=projects[projectId].content[toEditProjectContent].contentName%>" >
-            <label for="content-link">content link</label>
-            <input type="text" name="contentLink" id="content-link" autocomplete="off"
+            <label >content link</label>
+            <input type="text" name="contentLink"  autocomplete="off"
             placeholder="<%=projects[projectId].content[toEditProjectContent].contentLink%>" >
-            <label for="content-date">content date</label>
-            <input type="date" name="contentDate" id="content-date">
+            <label >content date</label>
+            <input type="date" name="contentDate">
             <p>Current content date : (<%=projects[projectId].content[toEditProjectContent].contentDate%>)</p>
             <button class="btn add" type="submit" name="button" value="editProjectContent">save</button>
             <button class="btn cancel" name="button" value="cancel" type="submit">cancel</button>
